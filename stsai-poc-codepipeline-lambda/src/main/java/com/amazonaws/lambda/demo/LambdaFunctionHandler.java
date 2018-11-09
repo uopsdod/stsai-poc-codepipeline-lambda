@@ -47,6 +47,8 @@ public class LambdaFunctionHandler implements RequestHandler<Object, String> {
 	        
 	        /** get input params - source uri **/
 	        JsonArray inputArtifacts = data.get("inputArtifacts").getAsJsonArray();
+	        
+	        /** process main process **/
 	        for (JsonElement inputArtifact : inputArtifacts) {
 	            JsonObject inputArtifactJsonObj = inputArtifact.getAsJsonObject();
 	            JsonObject locationJsonObj = inputArtifactJsonObj.get("location").getAsJsonObject();
@@ -59,7 +61,7 @@ public class LambdaFunctionHandler implements RequestHandler<Object, String> {
 	            	context.getLogger().log("stsai-poc-codepipeline-lambda bucketNameJsonStr: " + bucketNameJsonStr);
 	            	context.getLogger().log("stsai-poc-codepipeline-lambda objectKeyJsonStr: " + objectKeyJsonStr);
 	
-	            	/** process main process **/
+	            	
 	            	final AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
             		String OutputBucketNameJsonStr = bucketNameJsonStr+"-output";
             		createS3Bucket(OutputBucketNameJsonStr);
